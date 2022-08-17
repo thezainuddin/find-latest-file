@@ -21,3 +21,6 @@ jobs:
         - name: test
           run: |
             echo ${{steps.file_changes.outputs.files_modified}}
+            TEMP='${{ steps.file_changes.outputs.files_modified}}'
+            newFile=$(sed -E 's|.*(test)|\1|'<<<"$TEMP")
+            echo "$newFile" 
