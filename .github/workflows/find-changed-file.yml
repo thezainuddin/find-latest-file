@@ -10,19 +10,10 @@ jobs:
       steps:
         - name: Checkout the code
           uses: actions/checkout@v3
-        - name: Run a multi-line script
+        - name: Fetch the config file that was modified most recently 
+          id: extract-fname
           run: |
-            ls -lah
-            ls -tl *.conf | head -n1
-        - id: file_changes
-          uses: trilom/file-changes-action@v1.2.3
-          with:
-            output: 'json'
-            fileOutput: 'json'
-        - name: test
+            echo "::set-output name=recent-file::$(ls -tl *.conf | head -n1)"
+        - name: Generate something
           run: |
-            cat $HOME/files_modified.json
-            echo ${{steps.file_changes.outputs.files_modified}}
-            TEMP='${{ steps.file_changes.outputs.files_modified}}'
-            newFile=$(sed -E 's|.*(test)|\1|'<<<"$TEMP")
-            echo "$newFile" 
+            echo ${{steps.extract-fname.outputs.recent-file}}
