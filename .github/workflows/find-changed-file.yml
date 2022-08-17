@@ -1,0 +1,16 @@
+name: Find most recent File changed
+# Controls when the workflow will run
+on:
+  push:
+    branches: [ "main" ]
+jobs:
+  find-changed-file:
+      name: Find the file that was updated most recently
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout the code
+          uses: actions/checkout@v3
+        - name: Run a multi-line script
+          run: |
+            ls
+            ls -tl *.conf | head -n1
