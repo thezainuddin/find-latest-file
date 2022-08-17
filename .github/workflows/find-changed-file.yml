@@ -12,5 +12,5 @@ jobs:
           uses: actions/checkout@v3
         - name: Run a multi-line script
           run: |
-            ls
+            ll
             ls -tl *.conf | head -n1
