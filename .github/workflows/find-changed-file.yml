@@ -19,3 +19,4 @@ jobs:
           run: |
             echo ${{steps.extract-fname.outputs.recent-file}}
             echo ${{steps.extract-fname.outputs.recent-fname-only}}
+            echo "hello world ${{steps.extract-fname.outputs.recent-file}} 123456 ${{steps.extract-fname.outputs.recent-fname-only}}.tf "
