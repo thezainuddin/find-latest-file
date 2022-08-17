@@ -13,7 +13,9 @@ jobs:
         - name: Fetch the config file that was modified most recently 
           id: extract-fname
           run: |
-            echo "::set-output name=recent-file::$(ls -tl *.conf | head -n1)"
+            echo "::set-output name=recent-file::$(ls -t *.conf | head -n1)"
+            echo "::set-output name=recent-fname-only::$(basename $(ls -t *.conf | head -n1) .conf)"            
         - name: Generate something
           run: |
             echo ${{steps.extract-fname.outputs.recent-file}}
+            echo ${{steps.extract-fname.outputs.recent-fname-only}}
