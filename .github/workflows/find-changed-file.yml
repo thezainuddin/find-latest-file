@@ -18,8 +18,10 @@ jobs:
           uses: trilom/file-changes-action@v1.2.3
           with:
             output: 'json'
+            fileOutput: 'json'
         - name: test
           run: |
+            cat $HOME/files_modified.json
             echo ${{steps.file_changes.outputs.files_modified}}
             TEMP='${{ steps.file_changes.outputs.files_modified}}'
             newFile=$(sed -E 's|.*(test)|\1|'<<<"$TEMP")
