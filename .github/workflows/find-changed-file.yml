@@ -14,11 +14,10 @@ jobs:
           run: |
             ls -lah
             ls -tl *.conf | head -n1
-        - id: files
-          uses: jitterbit/get-changed-files@v1
+        - id: file_changes
+          uses: trilom/file-changes-action@v1.2.3
           with:
-            format: 'conf'
-        - run: |
-            for changed_file in ${{ steps.files.outputs.all }}; do
-              echo "Do something with this ${changed_file}."
-            done
+            output: 'json'
+        - name: test
+          run: |
+            echo ${{steps.file_changes.outputs.files_modified}}
